@@ -27,4 +27,9 @@ class UserServiceTest {
         assertEquals(1, pastList.size());
     }
 
+    @Test
+    void deleteTestScheduleById(Long id) {
+        testScheduleRepository.deleteById(id);
+    }
+
 }

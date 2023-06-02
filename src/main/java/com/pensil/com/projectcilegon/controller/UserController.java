@@ -109,10 +109,10 @@ public class UserController {
         return "BuatJadwalTest";
     }
 
-    /* @DeleteMapping("/jadwaltest/{userId}/{testScheduleId}")
+    @DeleteMapping("/jadwaltest/{userId}/{testScheduleId}")
     public String deleteTestSchedule(@PathVariable Long testScheduleId) {
     userService.deleteTestScheduleById(testScheduleId);
     return "BuatJadwalTest";
-    } */
+    }
 
 }
