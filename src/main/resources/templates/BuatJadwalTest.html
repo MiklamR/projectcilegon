@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buat Jadwal</title>
+    <style>
+        table, th, td {
+            border: 3px solid black;
+            border-collapse: collapse;
+        }
+
+        .content {
+            max-width: 500px;
+            margin: auto;
+        }
+
+        form {
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+        h1{
+            text-align: center;
+        }
+        h3{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <p th:text="${error}"></p>
+    <h1 class="content">Data Peserta</h1>
+    <br>
+    <table class="content">
+        <tr>
+            <td>Nama</td>
+            <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td th:text="${user.email}"></td>
+        </tr>
+
+    </table>
+<br>
+    <h1 class="content">Jadwal Test</h1>
+    <br>
+    <!-- form -->
+<div class="content">
+    <form th:action="@{/jadwaltest}" th:method="POST">
+        <input type="hidden" id="userId" name="userId" th:value="${user.id}">
+        <div class="mb-3">
+            <label for="testDateTime" class="form-label">Set waktu</label>
+            <input type="datetime-local" id="testDateTime" name="testDateTime">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+    </form>
+</div>
+    <br>
+<br>
+    <h3 class="content">Jadwal ujian yang akan datang</h3>
+    <table class="content">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tanggal & jam Pelaksanaan</th>
+                <th scope="col">Nilai test</th>
+                <th scope="col">Detail test</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="testSchedule, iterator : ${futureScheduleList}"> <!-- futureList -->
+                <td th:text="${iterator.index} + 1" scope="row"></td>
+                <td th:text="${testSchedule.testDateTime}"></td>
+                <td>&nbsp;</td>
+                <td><td>Klik <a th:href="${user.id} + '/' + ${testSchedule.id}">disini</a> untuk melihat detail ujian</a></td></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <h3 class="content">Jadwal ujian yang terlewat</h3>
+    <table class="content">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tanggal & jam Pelaksanaan</th>
+            <th scope="col">Nilai test</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="testSchedule, iterator : ${pastScheduleList}"> <!-- pastList -->
+            <td th:text="${iterator.index} + 1" scope="row"></td>
+            <td th:text="${testSchedule.testDateTime}"></td>
+            <td>&nbsp;</td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

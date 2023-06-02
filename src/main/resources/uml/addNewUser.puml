@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+participant webBrowser
+participant UserController
+participant UserService
+participant UserRepository
+autoactivate on
+webBrowser -> UserController: addUser
+
+    UserController ->UserService: addUser(user);
+        UserService -> UserRepository: save(user);
+        return user
+
+
+    deactivate UserService
+    UserController ->UserService: getUser()
+        UserService ->UserRepository: findAll()
+        return List<User>
+    return List<User>
+
+return "newUserFormAndList"
+@enduml
