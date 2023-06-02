@@ -75,8 +75,8 @@ public class UserService {
     }
 
 
-  /*  @Transactional
+    @Transactional
     public void deleteTestScheduleById(Long id) {
         testScheduleRepository.deleteById(id);
-    } */
+    }
 }
