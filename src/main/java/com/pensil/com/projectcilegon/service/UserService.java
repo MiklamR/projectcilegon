@@ -4,6 +4,8 @@ import com.pensil.com.projectcilegon.model.TestSchedule;
 import com.pensil.com.projectcilegon.model.User;
 import com.pensil.com.projectcilegon.reporsitory.TestScheduleRepository;
 import com.pensil.com.projectcilegon.reporsitory.UserRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,7 +19,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final TestScheduleRepository testScheduleRepository;
 
-
+@Autowired
     public UserService(UserRepository userRepository, TestScheduleRepository testScheduleRepository) {
         this.userRepository = userRepository;
         this.testScheduleRepository = testScheduleRepository;
@@ -65,9 +67,16 @@ public class UserService {
         }
     }
 
+
+
     public TestSchedule addTestSchedule(TestSchedule testSchedule) {
 
         return testScheduleRepository.save(testSchedule);
     }
 
+
+  /*  @Transactional
+    public void deleteTestScheduleById(Long id) {
+        testScheduleRepository.deleteById(id);
+    } */
 }
